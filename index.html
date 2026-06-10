@@ -4,10 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ludo-game</title>
+    <title>Ludo React - No Build</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ludo: {
+                red: '#EF4444',
+                green: '#22C55E',
+                yellow: '#EAB308',
+                blue: '#3B82F6',
+                board: '#F3F4F6',
+                safe: '#D1D5DB'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @keyframes animate-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-in {
+        animation: animate-in 0.3s ease-out;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-gray-950">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Entry Script as a module -->
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

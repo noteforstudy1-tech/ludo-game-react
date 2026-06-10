@@ -1,8 +1,8 @@
-import type { GameState, PlayerColor, Token, GameAction } from '../types';
-import { PATHS, YARDS, isSafeSpot } from './boardMap';
 
-export const initializeTokens = (colors: PlayerColor[] = ['red', 'green', 'yellow', 'blue']): Record<string, Token> => {
-  const tokens: Record<string, Token> = {};
+import { PATHS, YARDS, isSafeSpot } from './boardMap.js';
+
+export const initializeTokens = (colors = ['red', 'green', 'yellow', 'blue']) => {
+  const tokens = {};
   
   colors.forEach(color => {
     for (let i = 0; i < 4; i++) {
@@ -19,7 +19,7 @@ export const initializeTokens = (colors: PlayerColor[] = ['red', 'green', 'yello
   return tokens;
 };
 
-export const INITIAL_STATE: GameState = {
+export const INITIAL_STATE = {
   isStarted: false,
   mode: null,
   activePlayers: ['red', 'green', 'yellow', 'blue'],
@@ -32,12 +32,12 @@ export const INITIAL_STATE: GameState = {
   message: 'Welcome to Ludo! Please setup the game.',
 };
 
-export const getNextTurn = (currentTurn: PlayerColor, activePlayers: PlayerColor[]): PlayerColor => {
+export const getNextTurn = (currentTurn, activePlayers) => {
   const idx = activePlayers.indexOf(currentTurn);
   return activePlayers[(idx + 1) % activePlayers.length];
 };
 
-export const isValidMove = (token: Token, diceValue: number): boolean => {
+export const isValidMove = (token, diceValue) => {
   if (token.pathIndex === 56) return false;
   
   if (token.pathIndex === -1) {
@@ -51,17 +51,17 @@ export const isValidMove = (token: Token, diceValue: number): boolean => {
   return true;
 };
 
-export const hasValidMoves = (state: GameState): boolean => {
+export const hasValidMoves = (state) => {
   const playerTokens = Object.values(state.tokens).filter(t => t.color === state.currentTurn);
   return playerTokens.some(token => isValidMove(token, state.diceValue));
 };
 
-export const checkWinCondition = (tokens: Record<string, Token>, player: PlayerColor): boolean => {
+export const checkWinCondition = (tokens, player) => {
   const playerTokens = Object.values(tokens).filter(t => t.color === player);
   return playerTokens.every(t => t.pathIndex === 56);
 };
 
-export const gameReducer = (state: GameState, action: GameAction): GameState => {
+export const gameReducer = (state, action) => {
   switch (action.type) {
     case 'START_GAME': {
       const { players, bots, mode } = action.payload;
@@ -120,7 +120,7 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       }
       
       const targetPos = PATHS[token.color][newPathIndex];
-      const movedToken: Token = {
+      const movedToken = {
         ...token,
         pathIndex: newPathIndex,
         x: targetPos.x,
@@ -131,7 +131,6 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       let gotExtraTurn = state.diceValue === 6;
       let captureMessage = '';
       
-      // Check captures
       if (newPathIndex < 51 && !isSafeSpot(targetPos.x, targetPos.y)) {
         Object.values(newTokens).forEach(otherToken => {
           if (otherToken.id !== movedToken.id && 
@@ -141,7 +140,6 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
               otherToken.x === targetPos.x && 
               otherToken.y === targetPos.y) {
             
-            // Capture! Send back to yard
             const yardPos = YARDS[otherToken.color][parseInt(otherToken.id.split('-')[1])];
             newTokens[otherToken.id] = {
               ...otherToken,
@@ -155,7 +153,7 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
         });
       }
       
-      let winner: PlayerColor | null = state.winner;
+      let winner = state.winner;
       if (checkWinCondition(newTokens, state.currentTurn)) {
         winner = state.currentTurn;
         return {

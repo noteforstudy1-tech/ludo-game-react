@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+# Ludo React - No-Build Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A purely "serverless" and static version of the Ludo game. This version has **no npm dependencies**, **no build step**, and runs directly in the browser using native ES Modules and CDNs.
 
-Currently, two official plugins are available:
+## Features
+- **Zero Build**: No `npm install` or `npm run build` required.
+- **Purely Static**: Can be hosted on any static file host (GitHub Pages, Netlify, Vercel, etc.) by just uploading the files.
+- **P2P Multiplayer**: Uses PeerJS for direct browser-to-browser communication.
+- **React + htm**: Built with React 19 and `htm` for JSX-like syntax without a transpiler.
+- **Tailwind CSS**: Uses the Tailwind Play CDN for styling.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## How to Run Locally
+1. Clone the repository.
+2. Open `index.html` in a local web server (e.g., VS Code Live Server, or `python -m http.server`).
+   - *Note: Native ES Modules require a local server and won't work if opened via `file://` protocol.*
 
-## React Compiler
+## Deployment
+Since this project is entirely static, you can deploy it to GitHub Pages by simply pushing to the `master` branch and enabling GitHub Pages in the repository settings.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Technology Stack
+- [React 19](https://react.dev/) (via ESM CDN)
+- [PeerJS](https://peerjs.com/) (P2P Networking)
+- [htm](https://github.com/developit/htm) (JSX-like templates)
+- [Tailwind CSS](https://tailwindcss.com/) (Styling)
+- [Lucide](https://lucide.dev/) (Icons)

@@ -1,4 +1,3 @@
-import type { PlayerColor } from '../types';
 
 export const MAIN_PATH = [
   { x: 1, y: 6 }, { x: 2, y: 6 }, { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 },
@@ -36,7 +35,7 @@ export const START_INDICES = {
   blue: 39
 };
 
-export const YARDS: Record<PlayerColor, {x: number, y: number}[]> = {
+export const YARDS = {
   red: [{x: 2, y: 2}, {x: 3, y: 2}, {x: 2, y: 3}, {x: 3, y: 3}],
   green: [{x: 11, y: 2}, {x: 12, y: 2}, {x: 11, y: 3}, {x: 12, y: 3}],
   yellow: [{x: 11, y: 11}, {x: 12, y: 11}, {x: 11, y: 12}, {x: 12, y: 12}],
@@ -45,30 +44,21 @@ export const YARDS: Record<PlayerColor, {x: number, y: number}[]> = {
 
 export const HOME_COORD = { x: 7, y: 7 };
 
-// Pre-compute complete paths for each color.
-// Index 0-50 is the main track for that color.
-// Index 51-55 is the home stretch.
-// Index 56 is Home.
-export const generatePaths = (): Record<PlayerColor, {x: number, y: number}[]> => {
-  const paths: any = {};
-  const colors: PlayerColor[] = ['red', 'green', 'yellow', 'blue'];
+export const generatePaths = () => {
+  const paths = {};
+  const colors = ['red', 'green', 'yellow', 'blue'];
   
   colors.forEach(color => {
     const startIndex = START_INDICES[color];
     const path = [];
     
-    // 51 steps on the main loop
     for (let i = 0; i < 51; i++) {
       const index = (startIndex + i) % 52;
       path.push(MAIN_PATH[index]);
     }
     
-    // 5 steps in the home stretch
     path.push(...HOME_STRETCHES[color]);
-    
-    // 1 step for the final home
     path.push(HOME_COORD);
-    
     paths[color] = path;
   });
   
