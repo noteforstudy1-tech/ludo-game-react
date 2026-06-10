@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white antialiased overflow-hidden;
+  }
+}
+
+/* Ludo specific utility classes */
+@layer components {
+  .player-color-red { @apply bg-ludo-red text-white; }
+  .player-color-green { @apply bg-ludo-green text-white; }
+  .player-color-yellow { @apply bg-ludo-yellow text-white; }
+  .player-color-blue { @apply bg-ludo-blue text-white; }
+
+  .border-color-red { @apply border-ludo-red; }
+  .border-color-green { @apply border-ludo-green; }
+  .border-color-yellow { @apply border-ludo-yellow; }
+  .border-color-blue { @apply border-ludo-blue; }
+}
