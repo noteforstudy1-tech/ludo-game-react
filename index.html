@@ -4,7 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ludo React - No Build</title>
+    <title>Ludo React - Static</title>
+    
+    <!-- Import Map for bare module specifiers -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19?dev",
+          "react-dom": "https://esm.sh/react-dom@19?dev",
+          "react-dom/client": "https://esm.sh/react-dom@19/client?dev",
+          "htm/react": "https://esm.sh/htm@3.1.1/react?external=react",
+          "lucide-react": "https://esm.sh/lucide-react@0.474.0?external=react",
+          "clsx": "https://esm.sh/clsx@2.1.1",
+          "peerjs": "https://esm.sh/peerjs@1.5.4"
+        }
+      }
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,11 +49,14 @@
       .animate-in {
         animation: animate-in 0.3s ease-out;
       }
+      body {
+        margin: 0;
+        background-color: #030712; /* gray-950 */
+      }
     </style>
   </head>
-  <body class="bg-gray-950">
+  <body>
     <div id="root"></div>
-    <!-- Entry Script as a module -->
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>

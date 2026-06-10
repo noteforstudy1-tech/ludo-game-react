@@ -1,6 +1,6 @@
 
-import React, { StrictMode } from 'https://esm.sh/react@19';
-import { createRoot } from 'https://esm.sh/react-dom@19/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App.js';
 
 createRoot(document.getElementById('root')).render(

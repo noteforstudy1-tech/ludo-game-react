@@ -1,9 +1,9 @@
 
-import React from 'https://esm.sh/react@19';
-import { html } from 'https://esm.sh/htm/react';
+import React from 'react';
+import { html } from 'htm/react';
 import { isSafeSpot } from '../utils/boardMap.js';
-import { Star } from 'https://esm.sh/lucide-react';
-import clsx from 'https://esm.sh/clsx';
+import { Star } from 'lucide-react';
+import clsx from 'clsx';
 import { isValidMove } from '../utils/gameLogic.js';
 
 const TokenUI = ({ token, isClickable, onClick }) => {

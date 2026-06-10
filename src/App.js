@@ -1,6 +1,6 @@
 
-import React, { useEffect, useCallback } from 'https://esm.sh/react@19';
-import { html } from 'https://esm.sh/htm/react';
+import React, { useEffect, useCallback } from 'react';
+import { html } from 'htm/react';
 import { Board } from './components/Board.js';
 import { Sidebar } from './components/Sidebar.js';
 import { useLudoGame } from './hooks/useLudoGame.js';

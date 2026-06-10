@@ -1,8 +1,8 @@
 
-import React, { useState } from 'https://esm.sh/react@19';
-import { html } from 'https://esm.sh/htm/react';
-import { MessageSquare, Users, Dices, Send, Play, Settings, Bot, Users2 } from 'https://esm.sh/lucide-react';
-import clsx from 'https://esm.sh/clsx';
+import React, { useState } from 'react';
+import { html } from 'htm/react';
+import { MessageSquare, Users, Dices, Send, Play, Settings, Bot, Users2 } from 'lucide-react';
+import clsx from 'clsx';
 
 export const Sidebar = ({
   gameState,
