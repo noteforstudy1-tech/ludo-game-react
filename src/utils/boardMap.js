@@ -18,7 +18,7 @@ export const SAFE_SPOTS = [
   0, 8, 13, 21, 26, 34, 39, 47
 ].map(index => MAIN_PATH[index]);
 
-export const isSafeSpot = (x: number, y: number) => 
+export const isSafeSpot = (x, y) => 
   SAFE_SPOTS.some(spot => spot.x === x && spot.y === y);
 
 const HOME_STRETCHES = {
