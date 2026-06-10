@@ -56,10 +56,7 @@ export const useLudoNetwork = (onActionReceived: (action: GameAction) => void) =
         // Client receives peer list from host to connect to others
         payload.peers.forEach(p => {
           if (p !== peerRef.current?.id && !connectionsRef.current.has(p)) {
-            // Only initiate connection if our ID is "smaller" to avoid double connections
-            if (peerRef.current?.id && peerRef.current.id < p) {
-              connectToPeer(p);
-            }
+            connectToPeer(p);
           }
         });
         break;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Board } from './components/Board';
 import { Sidebar } from './components/Sidebar';
 import { useLudoGame } from './hooks/useLudoGame';
@@ -8,9 +8,11 @@ import { getBestBotMove } from './utils/botLogic';
 function App() {
   const game = useLudoGame();
   
-  const network = useLudoNetwork((action) => {
+  const handleActionReceived = useCallback((action: GameAction) => {
     game.dispatchAction(action);
-  });
+  }, [game]);
+
+  const network = useLudoNetwork(handleActionReceived);
 
   const handleStartGame = (players: any, bots: any, mode: any) => {
     game.startGame(players, bots, mode);

@@ -1,4 +1,4 @@
-import { useReducer, useCallback } from 'react';
+import { useReducer, useCallback, useMemo } from 'react';
 import { gameReducer, INITIAL_STATE } from '../utils/gameLogic';
 import type { GameAction, GameState, PlayerColor, GameMode } from '../types';
 
@@ -32,7 +32,7 @@ export const useLudoGame = () => {
     dispatch(action);
   }, []);
 
-  return {
+  return useMemo(() => ({
     state,
     startGame,
     rollDice,
@@ -40,5 +40,5 @@ export const useLudoGame = () => {
     syncState,
     resetGame,
     dispatchAction
-  };
+  }), [state, startGame, rollDice, moveToken, syncState, resetGame, dispatchAction]);
 };
