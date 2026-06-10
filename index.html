@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ludo React - Static</title>
+    <title>Ludo React - Static P2P</title>
     
     <!-- Import Map for bare module specifiers -->
     <script type="importmap">
@@ -55,46 +55,10 @@
         color: white;
         font-family: sans-serif;
       }
-      #error-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        color: #ff4444;
-        padding: 20px;
-        display: none;
-        z-index: 9999;
-        overflow: auto;
-        font-family: monospace;
-      }
     </style>
   </head>
   <body>
     <div id="root"></div>
-    <div id="error-overlay">
-      <h1 style="color: white">Runtime Error</h1>
-      <pre id="error-message"></pre>
-    </div>
-
-    <script>
-      // Error logging to screen
-      window.onerror = function(msg, url, lineNo, columnNo, error) {
-        const overlay = document.getElementById('error-overlay');
-        const message = document.getElementById('error-message');
-        overlay.style.display = 'block';
-        message.textContent += `Error: ${msg}\nAt: ${url}:${lineNo}:${columnNo}\n\n`;
-        return false;
-      };
-      window.onunhandledrejection = function(event) {
-        const overlay = document.getElementById('error-overlay');
-        const message = document.getElementById('error-message');
-        overlay.style.display = 'block';
-        message.textContent += `Unhandled Promise Rejection: ${event.reason}\n\n`;
-      };
-    </script>
-
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
