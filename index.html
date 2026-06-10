@@ -10,11 +10,11 @@
     <script type="importmap">
       {
         "imports": {
-          "react": "https://esm.sh/react@19?dev",
-          "react-dom": "https://esm.sh/react-dom@19?dev",
-          "react-dom/client": "https://esm.sh/react-dom@19/client?dev",
-          "htm/react": "https://esm.sh/htm@3.1.1/react?external=react",
-          "lucide-react": "https://esm.sh/lucide-react@0.474.0?external=react",
+          "react": "https://esm.sh/react@19",
+          "react-dom": "https://esm.sh/react-dom@19",
+          "react-dom/client": "https://esm.sh/react-dom@19/client",
+          "htm/react": "https://esm.sh/htm@3.1.1/react",
+          "lucide-react": "https://esm.sh/lucide-react@0.474.0",
           "clsx": "https://esm.sh/clsx@2.1.1",
           "peerjs": "https://esm.sh/peerjs@1.5.4"
         }
@@ -52,11 +52,49 @@
       body {
         margin: 0;
         background-color: #030712; /* gray-950 */
+        color: white;
+        font-family: sans-serif;
+      }
+      #error-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        color: #ff4444;
+        padding: 20px;
+        display: none;
+        z-index: 9999;
+        overflow: auto;
+        font-family: monospace;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
+    <div id="error-overlay">
+      <h1 style="color: white">Runtime Error</h1>
+      <pre id="error-message"></pre>
+    </div>
+
+    <script>
+      // Error logging to screen
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        const overlay = document.getElementById('error-overlay');
+        const message = document.getElementById('error-message');
+        overlay.style.display = 'block';
+        message.textContent += `Error: ${msg}\nAt: ${url}:${lineNo}:${columnNo}\n\n`;
+        return false;
+      };
+      window.onunhandledrejection = function(event) {
+        const overlay = document.getElementById('error-overlay');
+        const message = document.getElementById('error-message');
+        overlay.style.display = 'block';
+        message.textContent += `Unhandled Promise Rejection: ${event.reason}\n\n`;
+      };
+    </script>
+
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
