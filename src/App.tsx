@@ -4,6 +4,7 @@ import { Sidebar } from './components/Sidebar';
 import { useLudoGame } from './hooks/useLudoGame';
 import { useLudoNetwork } from './hooks/useLudoNetwork';
 import { getBestBotMove } from './utils/botLogic';
+import type { GameAction } from './types';
 
 function App() {
   const game = useLudoGame();
